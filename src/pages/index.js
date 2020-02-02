@@ -1,21 +1,67 @@
-import React from "react"
-import { Link } from "gatsby"
-
+import React, { Fragment } from "react"
+import Link from "gatsby-link"
+import { graphql } from "gatsby"
+import PropTypes from "prop-types"
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+const AllPosts = ({ data }) => (
+  <Fragment>
+    <header>
+      <h1>Posts</h1>
+    </header>
+
+    <section>
+      {data.allWordpressPost.edges.map(({ node }) => (
+        <article key={node.slug} className={"post"} style={{ marginBottom: 50 }}>
+          <h3 className="entry-title">
+            <Link to={'post/' + node.slug}>
+              {node.title}
+            </Link>
+          </h3>
+
+          <div className="entry-content">
+            <div className="post-content" dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+          </div>
+
+          <div className="entry-meta">{node.date}</div>
+        </article>
+      ))}
+    </section>
+  </Fragment>
 )
 
-export default IndexPage
+const HomePage = (props) => {
+  const data = props.data
+  console.log(data)
+
+  return (
+    <Layout>
+      <main className="content-area" id="primary">
+        <AllPosts data={data} />
+      </main>
+    </Layout >
+  )
+}
+
+HomePage.propTypes = {
+  data: PropTypes.object.isRequired,
+  edges: PropTypes.array,
+}
+
+export default HomePage
+
+export const pageQuery = graphql`
+    query postsQuery{
+      allWordpressPost{
+        edges{
+          node{
+            id
+            title
+            excerpt
+            slug
+            date(formatString: "MMMM DD, YYYY")
+        }
+    }
+  }
+}
+`
