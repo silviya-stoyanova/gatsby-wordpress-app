@@ -33,9 +33,6 @@ module.exports = {
       options: {
 
         baseUrl: "demo.wp-api.org", 
-        // baseUrl: "live-gatbsyjswp.pantheonsite.io", 
-        // baseUrl: "wels.net",
-        // baseUrl: "silviyastoyanova.code.blog",
         protocol: "https",
 
         hostingWPCOM: false,
