@@ -1,8 +1,7 @@
 // unused component
 import React, { Fragment } from "react"
-import Link from "gatsby-link"
 
-const RecentPosts = ({ title, array }) => (
+const Categories = ({ title, array }) => (
     <Fragment>
         <header>
             <h1>{title}</h1>
@@ -13,9 +12,7 @@ const RecentPosts = ({ title, array }) => (
                 {
                     array.map(el => (
                         <li key={el.node.slug}>
-                            <Link to={'post/' + el.node.slug}>
-                                {el.node.title}
-                            </Link>
+                            {el.node.name}
                         </li>
                     ))
                 }
@@ -24,4 +21,4 @@ const RecentPosts = ({ title, array }) => (
     </Fragment>
 )
 
-// export default RecentPosts
+// export default Categories

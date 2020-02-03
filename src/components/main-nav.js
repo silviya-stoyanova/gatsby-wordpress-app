@@ -2,42 +2,36 @@ import React, { Fragment } from "react"
 import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
 
-const SideNav = () => {
-    const navQuery = useStaticQuery(graphql`
-        query NavQuery {
+const MainNav = ({ title, array }) => {
+
+    const data = useStaticQuery(graphql`
+        query mainNavQuery {
             allWordpressPage {
                 nodes {
                     path
                     title
+                    slug
                 }
             }
         }
     `)
 
-    const Nav = navQuery.allWordpressPage
-
     return (
         <Fragment>
-            <header>
-                <h1>You might also like..</h1>
-            </header>
-
-            <section className="widget widget_recent_entries">
+            <nav className="main-navigation">
                 <ul>
                     {
-                        Nav.nodes.map(page => (
-                            <li>
-
-                                <Link to={page.path}>
-                                    {page.title}
+                        data.allWordpressPage.nodes.map(el => (
+                            <li key={el.slug}>
+                                <Link to={el.path}>
+                                    {el.title.split(' ')[0]}
                                 </Link>
                             </li>
                         ))
                     }
                 </ul>
-            </section>
+            </nav>
         </Fragment>
     )
 }
-
-export default SideNav
+export default MainNav

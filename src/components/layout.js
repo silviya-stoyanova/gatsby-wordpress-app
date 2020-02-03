@@ -1,18 +1,10 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
-import Footer from "./footer"
-import SideNav from "../components/side-nav.js"
-import RecentPosts from "../components/recent-posts.js"
+import Header from "./Header"
+import Footer from "./Footer"
+import AsideBar from "./aside-bar"
 
 import "./layout.css"
 import "./style.css"
@@ -20,10 +12,9 @@ import "./style.css"
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
+      wordpressSiteMetadata {
+        name
+        description
       }
 
       allWordpressPost{
@@ -37,24 +28,59 @@ const Layout = ({ children }) => {
           }
         }
       }
+
+      allWordpressPage {
+        nodes {
+          path
+          title
+          slug
+        }
+      }
+
+      allWordpressCategory {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
+
+      allWordpressTag {
+        edges {
+          node {
+            name
+            slug
+          }
+        }
+      }
     }
   `)
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title + " ♥"} />
-      <div className="has-sidebar" style={{ margin: `0 auto`, maxWidth: 960, padding: `0 1.0875rem 1.45rem`, }}>
-        <main className="wrap">
-          {children}
+      <Header details={data.wordpressSiteMetadata} />
 
+      <div className="has-sidebar">
+        <div className="wrap">
+          <main className="content-area" id="primary">
+            {children}
+          </main>
 
           <aside className="widget-area" id="secondary">
-            <RecentPosts data={data.allWordpressPost.edges} />
-            <SideNav />
+            <AsideBar title="Latest Posts" array={data.allWordpressPost.edges.slice(0, 4)} hasLink={true} />
+            {/* <AsideBar title="You might also like.." array={data.allWordpressPage.nodes} hasLink={true} isListOfPages={true} /> */}
+            <AsideBar title="List of all categories" array={data.allWordpressCategory.edges} />
+            <AsideBar title="List of all tags" array={data.allWordpressTag.edges} />
+            {/* <Pages title="You might also like.." array={data.allWordpressPage.nodes} /> */}
+            {/* <RecentPosts title="Latest Posts" array={data.allWordpressPost.edges.slice(0, 4)} /> */}
+            {/* <Categories title="List of all categories" array={data.allWordpressCategory.edges} /> */}
+            {/* <Tags title="List of all tags" array={data.allWordpressTag.edges} /> */}
           </aside>
 
-        </main>
+        </div>
       </div>
+
       <Footer />
     </>
   )
@@ -65,3 +91,9 @@ Layout.propTypes = {
 }
 
 export default Layout
+
+// site {
+//   siteMetadata {
+//     title
+//   }
+// }

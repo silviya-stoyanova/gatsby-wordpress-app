@@ -1,7 +1,8 @@
 import React from "react"
+import Link from "gatsby-link"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 const Tags = ({ post }) => {
   let content = 'Tags: '
@@ -31,14 +32,33 @@ const Categories = ({ post }) => {
   )
 }
 
+const getPostSiblings = (currPost, allPosts) => (
+  allPosts.filter(post => post.node.slug === currPost.slug)[0]
+)
+
+const NavLink = ({ post, postType }) => (
+  post
+    ? (
+      <Link to={'post/' + post.slug} className={"nav-" + postType} >
+        <span className="nav-subtitle">{postType}</span>
+        <span >{post.title}</span>
+      </Link >
+    )
+    : null
+)
+
 const PostTemplate = (props) => {
   const post = props.data.wordpressPost
+  const allPosts = props.data.allWordpressPost.edges
+  const postSiblings = getPostSiblings(post, allPosts)
   const resolutions = (post.featured_media) ? post.featured_media.localFile.childImageSharp.resolutions : null
 
   return (
     <Layout>
-      <section id="primary">
-        <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
+      <section>
+        <header>
+          <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
+        </header>
 
         {resolutions &&
           <div>
@@ -52,6 +72,15 @@ const PostTemplate = (props) => {
         <hr />
         <Tags post={post} />
         <Categories post={post} />
+
+        <footer>
+          <nav className="navigation post-navigation">
+            <div className="nav-links">
+              <NavLink post={postSiblings.previous} postType="previous" />
+              <NavLink post={postSiblings.next} postType="next" />
+            </div>
+          </nav>
+        </footer>
       </section>
     </Layout >
   )
@@ -70,6 +99,24 @@ export const pageQuery = graphql`
             tags {
               name
             }
+            slug
         }
+
+      allWordpressPost {
+        edges {
+          node {
+            title
+            slug
+          }
+          previous {
+            title
+            slug
+          }
+          next {
+            title
+            slug
+          }
+        }
+      }
     }
 `

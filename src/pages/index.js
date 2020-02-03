@@ -2,7 +2,7 @@ import React, { Fragment } from "react"
 import Link from "gatsby-link"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 const AllPosts = ({ data }) => (
   <Fragment>
@@ -12,7 +12,7 @@ const AllPosts = ({ data }) => (
 
     <section>
       {data.allWordpressPost.edges.map(({ node }) => (
-        <article key={node.slug} className={"post"} style={{ marginBottom: 50 }}>
+        <article key={node.slug} className={"post"}>
           <h3 className="entry-title">
             <Link to={'post/' + node.slug}>
               {node.title}
@@ -32,13 +32,10 @@ const AllPosts = ({ data }) => (
 
 const HomePage = (props) => {
   const data = props.data
-  console.log(data)
 
   return (
     <Layout>
-      <main className="content-area" id="primary">
-        <AllPosts data={data} />
-      </main>
+      <AllPosts data={data} />
     </Layout >
   )
 }
