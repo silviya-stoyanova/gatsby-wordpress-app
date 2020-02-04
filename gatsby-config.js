@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: `/gatsby-wordpress-app`,
+  // pathPrefix: `/gatsby-wordpress-app`,
 
   siteMetadata: {
     title: `Gatsby Default Starter`,
