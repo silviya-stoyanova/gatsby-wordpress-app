@@ -32,8 +32,8 @@ module.exports = {
       resolve: "gatsby-source-wordpress",
       options: {
 
-        // baseUrl: "demo.wp-api.org", 
-        baseUrl: "wpdemo.gatsbycentral.com", 
+        // baseUrl: "wpdemo.gatsbycentral.com", 
+        baseUrl: "demo.wp-api.org", 
         protocol: "https",
 
         hostingWPCOM: false,
