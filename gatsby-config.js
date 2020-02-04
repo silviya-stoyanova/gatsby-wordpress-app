@@ -1,4 +1,6 @@
 module.exports = {
+  pathPrefix: `/gatsby-wordpress-app`,
+
   siteMetadata: {
     title: `Gatsby Default Starter`,
     subtitle: `Fetch Data From WordPress`,
