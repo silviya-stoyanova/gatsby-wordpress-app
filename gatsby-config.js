@@ -33,7 +33,7 @@ module.exports = {
       options: {
 
         // baseUrl: "demo.wp-api.org", 
-        // baseUrl: "wpdemo.gatsbycentral.com", 
+        baseUrl: "wpdemo.gatsbycentral.com", 
         protocol: "https",
 
         hostingWPCOM: false,
