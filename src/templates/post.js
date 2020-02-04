@@ -100,6 +100,8 @@ export const pageQuery = graphql`
               name
             }
             slug
+            
+            
         }
 
       allWordpressPost {
@@ -120,3 +122,16 @@ export const pageQuery = graphql`
       }
     }
 `
+
+
+// featured_media {
+//   localFile {
+//     childImageSharp {
+//       resolutions {
+//         src
+//         width
+//         height
+//       }
+//     }
+//   }
+// }
