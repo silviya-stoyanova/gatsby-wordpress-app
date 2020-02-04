@@ -2,7 +2,7 @@ import React from "react"
 import Link from "gatsby-link"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
-import Layout from "../components/Layout"
+import Layout from "../components/layout"
 
 const Tags = ({ post }) => {
   let content = 'Tags: '
