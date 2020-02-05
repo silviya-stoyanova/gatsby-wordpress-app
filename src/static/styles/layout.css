@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Wire+One&display=swap');
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -615,6 +617,38 @@ pre tt:before,
 pre tt:after {
   content: "";
 }
+
+.entry-content,
+.content-area section p {
+  font-size: 0.75rem;
+}
+
+.content-area section {
+  padding-right: 1rem;
+}
+
+.widget-area header h2 {
+  font-size: 1rem
+}
+
+.widget_recent_entries {
+  font-size: 0.7rem
+}
+
+.site-title,
+.site-description {
+  padding-left: 1.4rem;
+}
+
+.site-description {
+  font-family: Wire One, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  line-height: 0.5rem;
+  padding-bottom: 0.8rem;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;

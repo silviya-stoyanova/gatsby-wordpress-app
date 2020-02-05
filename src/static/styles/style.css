@@ -3278,7 +3278,8 @@ object {
 	.wrap {
 		display: flex;
 		flex-wrap: wrap;
-		max-width: 1000px;
+		justify-content: space-between;
+		max-width: 100vw;
 	}
 
 	.has-sidebar:not(.error404) #primary {
@@ -3289,7 +3290,7 @@ object {
 	.has-sidebar #secondary {
 		float: right;
 		padding-top: 0;
-		width: 36%;
+		width: 30%;
 	}
 
 	.error404 #primary {
@@ -3450,7 +3451,7 @@ object {
 	
 	.main-navigation a {
 		padding: 0.5em 1em;
-		border: 1px solid transparent;
+		border: 2px solid transparent;
 		font-size: 0.8rem;
 		text-align: center;
 		transition: border ease-in 0.2s ;
@@ -3460,13 +3461,16 @@ object {
 	
 	.main-navigation a:hover,
 	.main-navigation a:focus {
-		border: 1px solid black;
+		border: 2px solid #CDDEE6;
 		border-bottom: transparent;
+		outline: none;
 	}
 
 	.main-header {
 		border-bottom: 1px solid black;
 		margin-bottom: 1rem;
+		background: no-repeat url('../images/pexels-photo.jpg');
+		background-position: center;
 	}
 
 	header,
@@ -3983,7 +3987,8 @@ object {
 	.site-info {
 		float: left;
 		padding: 0.7em 0 0;
-		width: 58%;
+		width: 50%;
+		text-align: center;
 	}
 
 	.social-navigation + .site-info {

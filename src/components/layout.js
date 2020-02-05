@@ -6,8 +6,8 @@ import Header from "./header"
 import Footer from "./footer"
 import AsideBar from "./aside-bar"
 
-import "./layout.css"
-import "./style.css"
+import "../static/styles/style.css"
+import "../static/styles/layout.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
