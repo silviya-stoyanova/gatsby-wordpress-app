@@ -68,16 +68,10 @@ const Layout = ({ children }) => {
           </main>
 
           <aside className="widget-area" id="secondary">
-            <AsideBar title="Latest Posts" array={data.allWordpressPost.edges.slice(0, 4)} hasLink={true} />
-            {/* <AsideBar title="You might also like.." array={data.allWordpressPage.nodes} hasLink={true} isListOfPages={true} /> */}
-            <AsideBar title="List of all categories" array={data.allWordpressCategory.edges} />
-            <AsideBar title="List of all tags" array={data.allWordpressTag.edges} />
-            {/* <Pages title="You might also like.." array={data.allWordpressPage.nodes} /> */}
-            {/* <RecentPosts title="Latest Posts" array={data.allWordpressPost.edges.slice(0, 4)} /> */}
-            {/* <Categories title="List of all categories" array={data.allWordpressCategory.edges} /> */}
-            {/* <Tags title="List of all tags" array={data.allWordpressTag.edges} /> */}
+            <AsideBar title="Latest Posts" array={data.allWordpressPost.edges.slice(0, 4)} type="post" isListOfPages={true} />
+            <AsideBar title="Categories" array={data.allWordpressCategory.edges} type="category" />
+            <AsideBar title="Tags" array={data.allWordpressTag.edges} type="tag" />
           </aside>
-
         </div>
       </div>
 
@@ -91,9 +85,3 @@ Layout.propTypes = {
 }
 
 export default Layout
-
-// site {
-//   siteMetadata {
-//     title
-//   }
-// }

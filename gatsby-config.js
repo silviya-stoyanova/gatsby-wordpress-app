@@ -35,7 +35,9 @@ module.exports = {
       options: {
 
         // baseUrl: "wpdemo.gatsbycentral.com", 
-        baseUrl: "demo.wp-api.org", 
+        // baseUrl: "silviyastoyanova.code.blog", 
+        // baseUrl: "demo.wp-api.org", 
+        baseUrl: "silviya-stoyanova.flywheelsites.com",
         protocol: "https",
 
         hostingWPCOM: false,
@@ -43,20 +45,25 @@ module.exports = {
         // useACF: false,
 
         acfOptionPageIds: [],
-        // auth: {
-        //   htaccess_user: "your-htaccess-username",
-        //   htaccess_pass: "your-htaccess-password",
-        //   htaccess_sendImmediately: false,
 
-        //   wpcom_app_clientSecret: process.env.WORDPRESS_CLIENT_SECRET,
-        //   wpcom_app_clientId: "54793",
-        //   wpcom_user: "gatsbyjswpexample@gmail.com",
-        //   wpcom_pass: process.env.WORDPRESS_PASSWORD,
 
-        //   jwt_user: process.env.JWT_USER,
-        //   jwt_pass: process.env.JWT_PASSWORD,
-        //   jwt_base_path: "/jwt-auth/v1/token", // Default - can skip if you are using https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
-        // },
+        auth: {
+          htaccess_user: "flywheel",
+          htaccess_pass: "1234567",
+          htaccess_sendImmediately: false,
+
+          wpcom_app_clientSecret: process.env.WORDPRESS_CLIENT_SECRET,
+          wpcom_app_clientId: "54793",
+          wpcom_user: "gatsbyjswpexample@gmail.com",
+          wpcom_pass: process.env.WORDPRESS_PASSWORD,
+
+          jwt_user: process.env.JWT_USER,
+          jwt_pass: process.env.JWT_PASSWORD,
+          jwt_base_path: "/jwt-auth/v1/token", // Default - can skip if you are using https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/
+        },
+
+
+
         cookies: {},
         // verboseOutput: false,
         verboseOutput: true,
@@ -91,5 +98,22 @@ module.exports = {
         ],
       },
     },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `markdown-pages`,
+    //     path: `${__dirname}/src/markdown-pages`,
+    //   },
+    // },
+
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     path: `${__dirname}/src/markdown-pages`,
+    //     name: `markdown-pages`,
+    //   },
+    // },
+    // `gatsby-transformer-remark`,
+
   ],
 }

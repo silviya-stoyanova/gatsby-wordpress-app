@@ -5,13 +5,14 @@ const slash = require(`slash`)
 const queryAll = require(`./src/queries/queryAll.js`)
 // const createPaginatedPages = require("gatsby-paginate")
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
   return new Promise((resolve, reject) => {
     // Templates
     const pageTemplate = path.resolve("./src/templates/page.js");
     const postTemplate = path.resolve("./src/templates/post.js");
+    const blogPostTemplate = path.resolve(`src/templates/blogTemplate.js`)
 
     resolve(
       graphql(queryAll).then(result => {
@@ -51,6 +52,19 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             },
           });
         })
+
+
+        // const markdowns = result.data.allMarkdownRemark.edges
+
+        // markdowns.forEach(({ node }) => {
+        //   createPage({
+        //     path: node.frontmatter.path,
+        //     component: blogPostTemplate,
+        //     context: {}, // additional data can be passed via context
+        //   })
+        // })
+
+
 
       })
     )

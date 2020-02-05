@@ -5,32 +5,38 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 
 const Tags = ({ post }) => {
-  let content = 'Tags: '
-
-  content += post.tags
-    ? post.tags.map(tag => tag.name).join(', ')
-    : 'no tags'
-
   return (
     <div>
-      <i className="italic" dangerouslySetInnerHTML={{ __html: content }} />
+      <i> Tags:
+        {
+          post.tags
+            ? post.tags.map(tag =>
+              <Link to={'tag/' + tag.slug}>
+                {tag.name + " "}
+              </Link>
+            )
+            : 'no tags'
+        }
+      </i>
     </div>
   )
 }
 
-const Categories = ({ post }) => {
-  let content = 'Category: '
-
-  content += post.categories
-    ? post.categories.map(category => category.name).join(', ')
-    : 'no categories'
-
-  return (
-    <div>
-      <i className="italic" dangerouslySetInnerHTML={{ __html: content }} />
-    </div>
-  )
-}
+const Categories = ({ post }) => (
+  <div>
+    <i> Categories:
+        {
+        post.categories
+          ? post.categories.map(category => (
+            <Link to={'category/' + category.slug}>
+              {category.name + ' '}
+            </Link >
+          ))
+          : 'no categories'
+      }
+    </i>
+  </div>
+)
 
 const getPostSiblings = (currPost, allPosts) => (
   allPosts.filter(post => post.node.slug === currPost.slug)[0]
@@ -41,7 +47,7 @@ const NavLink = ({ post, postType }) => (
     ? (
       <Link to={'post/' + post.slug} className={"nav-" + postType} >
         <span className="nav-subtitle">{postType}</span>
-        <span >{post.title}</span>
+        <span>{post.title}</span>
       </Link >
     )
     : null
@@ -63,7 +69,7 @@ const PostTemplate = (props) => {
         {resolutions &&
           <div>
             <Img resolutions={resolutions} />
-            <img src={resolutions.src} alt="" />
+            {/* <img src={resolutions.src} alt="" /> */}
           </div>
         }
 
@@ -95,12 +101,24 @@ export const pageQuery = graphql`
             content
             categories {
               name
+              slug
             }
             tags {
               name
+              slug
             }
             slug
-            
+            featured_media {
+              localFile {
+                childImageSharp {
+                  resolutions {
+                    src
+                    width
+                    height
+                  }
+                }
+              }
+            }
             
         }
 
@@ -123,15 +141,3 @@ export const pageQuery = graphql`
     }
 `
 
-
-// featured_media {
-//   localFile {
-//     childImageSharp {
-//       resolutions {
-//         src
-//         width
-//         height
-//       }
-//     }
-//   }
-// }

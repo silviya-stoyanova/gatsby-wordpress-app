@@ -1,5 +1,6 @@
 import React, { Fragment } from "react"
 import Link from "gatsby-link"
+import Img from "gatsby-image"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 import Layout from "../components/layout"
@@ -11,21 +12,31 @@ const AllPosts = ({ data }) => (
     </header>
 
     <section>
-      {data.allWordpressPost.edges.map(({ node }) => (
-        <article key={node.slug} className={"post"}>
-          <h3 className="entry-title">
-            <Link to={'post/' + node.slug}>
-              {node.title}
-            </Link>
-          </h3>
+      {data.allWordpressPost.edges.map(({ node }) => {
+        const resolutions = node.featured_media ? node.featured_media.localFile.childImageSharp.resolutions : null
 
-          <div className="entry-content">
-            <div className="post-content" dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-          </div>
+        return (
+          <article key={node.slug} className={"post"}>
+            <h3 className="entry-title">
+              <Link to={'post/' + node.slug}>
+                {node.title}
+              </Link>
+            </h3>
 
-          <div className="entry-meta">{node.date}</div>
-        </article>
-      ))}
+            {resolutions &&
+              <div>
+                <Img resolutions={resolutions} />
+              </div>
+            }
+
+            <div className="entry-content">
+              <div className="post-content" dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+            </div>
+
+            <div className="entry-meta">{node.date}</div>
+          </article>
+        )
+      })}
     </section>
   </Fragment>
 )
@@ -57,6 +68,18 @@ export const pageQuery = graphql`
             excerpt
             slug
             date(formatString: "MMMM DD, YYYY")
+
+            featured_media {
+            localFile {
+              childImageSharp {
+                resolutions {
+                  src
+                  width
+                  height
+                }
+              }
+            }
+          }
         }
     }
   }

@@ -24,7 +24,7 @@ const MainNav = ({ title, array }) => {
                         data.allWordpressPage.nodes.map(el => (
                             <li key={el.slug}>
                                 <Link to={el.path}>
-                                    {el.title.split(' ')[0]}
+                                    {el.title}
                                 </Link>
                             </li>
                         ))
